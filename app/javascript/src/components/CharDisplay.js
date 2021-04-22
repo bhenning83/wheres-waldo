@@ -1,12 +1,7 @@
 import React from 'react';
 
 function CharDisplay(props) {
-  const {char, foundChars} = props;
-
-  const isFound = () => {
-    return foundChars.includes(char.getName()) ?
-    'inline-block' : 'none';
-  } 
+  const {char, isFound} = props;
 
   const boxStyle = {
     display: 'flex',
@@ -16,9 +11,9 @@ function CharDisplay(props) {
   }
 
   const xStyle = {
-    position: 'fixed',
+    position: 'absolute',
     fontSize: '100px',
-    display: `${isFound()}`
+    display: `${isFound(char.getName())}`
   }
 
   const avStyle = {

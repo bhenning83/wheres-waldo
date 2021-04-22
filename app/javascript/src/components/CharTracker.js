@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import CharDisplay from './CharDisplay';
+const uniqid = require('uniqid')
 
 function CharTracker(props) {
-  const {characters} = props;
-  const [foundChars, setFoundChars] = useState(['Waldo'])
+  const {characters, foundChars, isFound} = props;
 
   const containerStyle = {
     background: 'LightBlue',
@@ -13,13 +13,18 @@ function CharTracker(props) {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    marginLeft: '25px'
   }
 
   return (
     <div style={containerStyle}>
       {Object.keys(characters).map(idx => {
-        return <CharDisplay char={characters[idx]} foundChars={foundChars} />
+        return <CharDisplay 
+        char={characters[idx]} 
+        foundChars={foundChars} 
+        isFound={isFound} 
+        key={uniqid()}/>
       })}
     </div>
   )

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Grid from './components/Grid';
 import CharTracker from './components/CharTracker';
 import waldoUrl from '../assets/images/Character.Waldo.jpg'
@@ -9,6 +9,7 @@ import odlawUrl from '../assets/images/Character.Odlaw.jpg'
 const character = require('./components/character');
 
 function App() {
+  const [foundChars, setFoundChars] = useState([])
 
   const homeStyle = {
     display: 'flex',
@@ -19,13 +20,22 @@ function App() {
   const characters = {
     1: character('Waldo', waldoUrl),
     2: character('Odlaw', odlawUrl),
-    3: character('Wilma', wendaUrl),
+    3: character('Wenda', wendaUrl),
   }
+
+  const alertCharFound = (str) => {
+    setFoundChars(foundChars => [...foundChars, str])
+  }
+
+  const isFound = (charName) => {
+    return foundChars.includes(charName) ?
+    'inline-block' : 'none';
+  } 
 
   return(
     <div style={homeStyle}>
-      <Grid />
-      <CharTracker characters = {characters}/>
+      <Grid alertCharFound={alertCharFound} isFound={isFound}/>
+      <CharTracker characters = {characters} foundChars={foundChars} isFound={isFound}/>
     </div>
   )
 }
