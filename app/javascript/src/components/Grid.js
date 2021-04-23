@@ -2,33 +2,25 @@ import React from 'react';
 import villageUrl from '../../assets/images/village.jpeg';
 import pirateUrl from '../../assets/images/pirate.jpeg';
 import battleUrl from '../../assets/images/battle.jpeg';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios'
 const uniqid = require('uniqid');
 
 function Grid(props) {
   const {alertCharFound, isFound} = props;
   const column = [];
   const rows = [];
-
-  const waldoLoc = {
-    0: [4, 7],
-    1: [4, 8],
-    2: [4, 9],
-    3: [4, 10],
-    4: [4, 11]
+  
+  const queryCoordsDb = async(ary) => {
+    let url = new URL('http://localhost:3000/data'),
+    params = {x: ary[0], y: ary[1]}
+    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
+    const response = await fetch(url)
+    const char = await response.text()
+    console.log(char)
   }
 
-  const odlawLoc = {
-    0: [54, 10],
-    1: [54, 11], 
-    2: [54, 12]
-  }
-
-  const wendaLoc = {
-    0: [54, 35],
-    1: [54, 36],
-  }
 
 
   for (let i = 0; i < 75; i++) {
@@ -40,26 +32,27 @@ function Grid(props) {
   }
 
   const handleClick = (ary) => {
-    Object.keys(waldoLoc).map(idx => {
-      if (waldoLoc[idx][0] === ary[0]
-        && waldoLoc[idx][1] === ary[1]) {
-        alertCharFound('Waldo')
-      }
-    })
+    queryCoordsDb(ary)
+    // Object.keys(waldoLoc).map(idx => {
+    //   if (waldoLoc[idx][0] === ary[0]
+    //     && waldoLoc[idx][1] === ary[1]) {
+    //     alertCharFound('Waldo')
+    //   }
+    // })
 
-    Object.keys(wendaLoc).map(idx => {
-      if (wendaLoc[idx][0] === ary[0]
-        && wendaLoc[idx][1] === ary[1]) {
-        alertCharFound('Wenda')
-      }
-    })
+    // Object.keys(wendaLoc).map(idx => {
+    //   if (wendaLoc[idx][0] === ary[0]
+    //     && wendaLoc[idx][1] === ary[1]) {
+    //     alertCharFound('Wenda')
+    //   }
+    // })
 
-    Object.keys(odlawLoc).map(idx => {
-      if (odlawLoc[idx][0] === ary[0]
-        && odlawLoc[idx][1] === ary[1]) {
-        alertCharFound('Odlaw')
-      }
-    })
+    // Object.keys(odlawLoc).map(idx => {
+    //   if (odlawLoc[idx][0] === ary[0]
+    //     && odlawLoc[idx][1] === ary[1]) {
+    //     alertCharFound('Odlaw')
+    //   }
+    // })
   }
 
   const frameStyle = {
@@ -97,37 +90,37 @@ function Grid(props) {
 
   const waldoCheck = {
     position: 'absolute',
-    bottom: '-425px',
+    bottom: '-415px',
     left: '105px',
     color: 'green',
+    background: 'white',
     fontSize: '2rem',
     boxShadow: '0 0 10px 10px white',
     borderRadius: '50%',
-    outline: '2px solid white',
     display: isFound('Waldo')
   }
 
   const wendaCheck = {
     position: 'absolute',
-    bottom: '-5px',
+    bottom: '0px',
     left: '1390px',
     color: 'green',
+    background: 'white',
     fontSize: '2rem',
     boxShadow: '0 0 10px 10px white',
     borderRadius: '50%',
-    outline: '2px solid white',
     display: isFound('Wenda')
   }
 
   const odlawCheck = {
     position: 'absolute',
-    bottom: '-400px',
+    bottom: '-385px',
     left: '1375px',
     color: 'green',
+    background: 'white',
     fontSize: '2rem',
     boxShadow: '0 0 7px 10px white',
     borderRadius: '50%',
-    outline: '2px solid white',
     display: isFound('Odlaw')
   }
 

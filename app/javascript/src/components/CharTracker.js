@@ -7,9 +7,9 @@ function CharTracker(props) {
 
   const containerStyle = {
     background: 'LightBlue',
-    height: '90vh',
+    height: '600px',
     flex: '1 1 100px',
-    border: '1px solid green',
+    border: '3px solid green',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
