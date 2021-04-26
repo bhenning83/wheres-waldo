@@ -5,7 +5,6 @@ import battleUrl from '../../assets/images/battle.jpeg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import StartScreen from './StartScreen'
-import axios from 'axios'
 const uniqid = require('uniqid');
 
 function Grid(props) {

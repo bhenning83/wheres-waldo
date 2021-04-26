@@ -8,9 +8,6 @@ function StartScreen(props) {
   }
 
   const startScreenStyle = {
-    // background: 'white',
-    // opacity: '80%',
-    // filter: 'blur(8px)',
     height: '1200px',
     width: '1920px',
     display: hidden(),
@@ -30,8 +27,8 @@ function StartScreen(props) {
   }
 
   return(
-    <div style={startScreenStyle} onClick={startGame}>
-      <button style={buttonStyle}>Click to Start</button>
+    <div style={startScreenStyle}>
+      <button style={buttonStyle}  onClick={startGame}>Click to Start</button>
     </div>
   )
 }

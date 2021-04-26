@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
 import Grid from './components/Grid';
 import CharTracker from './components/CharTracker';
-import Timer from './components/Timer';
-import waldoUrl from '../assets/images/Character.Waldo.jpg'
-import wendaUrl from '../assets/images/Character.Wenda.jpg'
-import odlawUrl from '../assets/images/Character.Odlaw.jpg'
+import TimerBox from './components/TimerBox';
+import waldoUrl from '../assets/images/Character.Waldo.jpg';
+import wendaUrl from '../assets/images/Character.Wenda.jpg';
+import odlawUrl from '../assets/images/Character.Odlaw.jpg';
+import { Timer } from 'timer-node';
+
 
 
 const character = require('./components/character');
@@ -12,10 +14,11 @@ const character = require('./components/character');
 function App() {
   const [foundChars, setFoundChars] = useState([])
   const [isGameStarted, setIsGameStarted] = useState(false)
+  const [timer] = useState(new Timer());
 
   const startGame = () => {
-    setIsGameStarted(x => !x)
-    console.log(isGameStarted)
+    setIsGameStarted(x => !x);
+    timer.start();
   }
 
   const homeStyle = {
@@ -52,7 +55,7 @@ function App() {
         isFound={isFound} 
         foundChars={foundChars} 
       />
-      <Timer foundChars={foundChars}/>
+      <TimerBox foundChars={foundChars} timer={timer} isGameStarted={isGameStarted}/>
     </div>
   )
 }
