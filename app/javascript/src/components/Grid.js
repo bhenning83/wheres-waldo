@@ -1,14 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import villageUrl from '../../assets/images/village.jpeg';
 import pirateUrl from '../../assets/images/pirate.jpeg';
 import battleUrl from '../../assets/images/battle.jpeg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import StartScreen from './StartScreen'
 import axios from 'axios'
 const uniqid = require('uniqid');
 
 function Grid(props) {
-  const {alertCharFound, isFound} = props;
+  const {alertCharFound, isFound, startGame, isGameStarted} = props;
+
   const column = [];
   const rows = [];
   
@@ -18,10 +20,8 @@ function Grid(props) {
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
     const response = await fetch(url)
     const char = await response.text()
-    console.log(char)
+    return char
   }
-
-
 
   for (let i = 0; i < 75; i++) {
     column.unshift(i);
@@ -31,28 +31,15 @@ function Grid(props) {
     rows[i] = column
   }
 
-  const handleClick = (ary) => {
-    queryCoordsDb(ary)
-    // Object.keys(waldoLoc).map(idx => {
-    //   if (waldoLoc[idx][0] === ary[0]
-    //     && waldoLoc[idx][1] === ary[1]) {
-    //     alertCharFound('Waldo')
-    //   }
-    // })
+  const handleClick = async (ary) => {
+    const char = await queryCoordsDb(ary)
+    if (char) {
+      alertCharFound(char)
+    }
+  }
 
-    // Object.keys(wendaLoc).map(idx => {
-    //   if (wendaLoc[idx][0] === ary[0]
-    //     && wendaLoc[idx][1] === ary[1]) {
-    //     alertCharFound('Wenda')
-    //   }
-    // })
-
-    // Object.keys(odlawLoc).map(idx => {
-    //   if (odlawLoc[idx][0] === ary[0]
-    //     && odlawLoc[idx][1] === ary[1]) {
-    //     alertCharFound('Odlaw')
-    //   }
-    // })
+  const blurred = () => {
+    return isGameStarted === true ? 'none' : 'blur(3px)'
   }
 
   const frameStyle = {
@@ -71,6 +58,7 @@ function Grid(props) {
 
   const imgStyle = {
     position: 'absolute',
+    filter: blurred(),
     height: '1200px',
     top: '0',
     left: '0',
@@ -126,10 +114,11 @@ function Grid(props) {
 
   return(
     <div id='frame' style={frameStyle}>
-      <img src={villageUrl} alt="" style={imgStyle}/>
+      <img src={villageUrl} alt="" style={imgStyle} />
       <FontAwesomeIcon icon={faCheckCircle} style={waldoCheck} />
       <FontAwesomeIcon icon={faCheckCircle} style={wendaCheck} />
       <FontAwesomeIcon icon={faCheckCircle} style={odlawCheck} />
+      <StartScreen startGame={startGame} isGameStarted={isGameStarted} />
       <div id='grid' style={gridStyle}>
         {rows.map((x, idx) => {
           return <div className='column' style={columnStyle} key={uniqid()}>

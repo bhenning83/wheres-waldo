@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import CharDisplay from './CharDisplay';
-const uniqid = require('uniqid')
+const uniqid = require('uniqid');
 
 function CharTracker(props) {
   const {characters, foundChars, isFound} = props;
