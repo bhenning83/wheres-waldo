@@ -1,25 +1,16 @@
 import React, {useState, useEffect} from 'react';
 
 function TimerBox(props) {
-  const {foundChars, timer, isGameStarted} = props
+  const {timer, isGameStarted, isGameOver} = props
   const [timerDisplay, setTimerDisplay] = useState('00:00')
 
-  const formatTimerText = () => {
+  const updateTimer = () => {
     let m = timer.time()['m'];
     let s = timer.time()['s'];
     m = m < 10 ? `0${m}` : `${m}`;
     s = s < 10 ? `0${s}` : `${s}`;
     setTimerDisplay(m + ':' + s)
   }
-
-  const updateTimer = () => {
-    if (foundChars.length === 3) {
-      setTimerDisplay('Game Over')
-    } else {
-      return formatTimerText()
-    }
-  }
-
 
   useEffect(() => {
     let int
@@ -32,8 +23,15 @@ function TimerBox(props) {
     })
   })
 
+  const gameOverStyle = {
+    display: isGameOver === true ? 'block' : 'none'
+  }
+
   return(
-    <div>{timerDisplay}</div>
+    <div>
+      <div style={gameOverStyle}>Game Over</div>
+      <div>{timerDisplay}</div>
+    </div>
   )
 }
 

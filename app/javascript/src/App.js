@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Grid from './components/Grid';
 import CharTracker from './components/CharTracker';
 import TimerBox from './components/TimerBox';
@@ -14,6 +14,7 @@ const character = require('./components/character');
 function App() {
   const [foundChars, setFoundChars] = useState([])
   const [isGameStarted, setIsGameStarted] = useState(false)
+  const [isGameOver, setIsGameOver] = useState(false)
   const [timer] = useState(new Timer());
 
   const startGame = () => {
@@ -42,6 +43,13 @@ function App() {
     'inline-block' : 'none';
   } 
 
+  useEffect(() => {
+    if (foundChars.length === 3) {
+      setIsGameOver(true)
+      timer.stop()
+    }
+  })
+
   return(
     <div style={homeStyle}>
       <Grid 
@@ -55,7 +63,11 @@ function App() {
         isFound={isFound} 
         foundChars={foundChars} 
       />
-      <TimerBox foundChars={foundChars} timer={timer} isGameStarted={isGameStarted}/>
+      <TimerBox 
+        timer={timer} 
+        isGameStarted={isGameStarted} 
+        isGameOver={isGameOver}
+      />
     </div>
   )
 }
