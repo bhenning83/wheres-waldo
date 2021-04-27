@@ -2,25 +2,26 @@ import React, {useState, useEffect} from 'react';
 
 function TimerBox(props) {
   const {timer, isGameStarted, isGameOver} = props
-  const [timerDisplay, setTimerDisplay] = useState('00:00')
+  const [timerDisplay, setTimerDisplay] = useState('00:00:00')
 
   const updateTimer = () => {
     let m = timer.time()['m'];
     let s = timer.time()['s'];
+    let h = timer.time()['h'];
     m = m < 10 ? `0${m}` : `${m}`;
     s = s < 10 ? `0${s}` : `${s}`;
-    setTimerDisplay(m + ':' + s)
+    h = h < 10 ? `0${h}` : `${h}`;
+    setTimerDisplay(h + ':' + m + ':' + s)
   }
 
   useEffect(() => {
     let int
-    if (isGameStarted === true) {
+    if (isGameStarted === true &&
+      isGameOver === false) {
       int = setInterval(updateTimer, 1000)
     }
 
-    return(() => {
-      clearInterval(int)
-    })
+    return(() => clearInterval(int))
   })
 
   const gameOverStyle = {

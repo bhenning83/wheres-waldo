@@ -5,6 +5,7 @@ import TimerBox from './components/TimerBox';
 import waldoUrl from '../assets/images/Character.Waldo.jpg';
 import wendaUrl from '../assets/images/Character.Wenda.jpg';
 import odlawUrl from '../assets/images/Character.Odlaw.jpg';
+import HighScores from './components/HighScores';
 import { Timer } from 'timer-node';
 
 
@@ -36,6 +37,7 @@ function App() {
 
   const alertCharFound = (str) => {
     setFoundChars(foundChars => [...foundChars, str])
+    checkGameOver()
   }
 
   const isFound = (charName) => {
@@ -43,11 +45,26 @@ function App() {
     'inline-block' : 'none';
   } 
 
-  useEffect(() => {
-    if (foundChars.length === 3) {
-      setIsGameOver(true)
+  const calcElapsedTime = () => {
+    const h = timer.time()['h'] * 60 * 60;
+    const m = timer.time()['m'] * 60;
+    const s = timer.time()['s'];
+    const t = h + m + s
+    console.log(t)
+    return t
+  }
+
+  const checkGameOver = () => {
+    if (foundChars.length === 3 
+      && isGameOver === false) {
       timer.stop()
+      setIsGameOver(true)
+      calcElapsedTime()
     }
+  }
+
+  useEffect(() => {
+    checkGameOver()
   })
 
   return(
@@ -68,6 +85,7 @@ function App() {
         isGameStarted={isGameStarted} 
         isGameOver={isGameOver}
       />
+      <HighScores />
     </div>
   )
 }
@@ -75,7 +93,6 @@ function App() {
 export default App
 
 // to do: 
-// -add timer 
 // -add high scores to db
-// -add start button to start timer
+
 // -add in additional levels (high scores for each)

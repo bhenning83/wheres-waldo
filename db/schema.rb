@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_23_144431) do
+ActiveRecord::Schema.define(version: 2021_04_27_192629) do
 
   create_table "characters", force: :cascade do |t|
     t.string "name"
@@ -24,6 +24,21 @@ ActiveRecord::Schema.define(version: 2021_04_23_144431) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["character_id"], name: "index_coordinates_on_character_id"
+  end
+
+  create_table "players", force: :cascade do |t|
+    t.text "name"
+    t.text "location"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "scores", force: :cascade do |t|
+    t.time "time"
+    t.integer "player_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["player_id"], name: "index_scores_on_player_id"
   end
 
 end

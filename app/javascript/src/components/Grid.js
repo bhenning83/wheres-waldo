@@ -14,7 +14,7 @@ function Grid(props) {
   const rows = [];
   
   const queryCoordsDb = async(ary) => {
-    let url = new URL('http://localhost:3000/data'),
+    let url = new URL('http://localhost:3000/coords'),
     params = {x: ary[0], y: ary[1]}
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
     const response = await fetch(url)

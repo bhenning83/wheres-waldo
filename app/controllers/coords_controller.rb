@@ -1,4 +1,4 @@
-class DataController < ApplicationController
+class CoordsController < ApplicationController
 
   def index
     @coord = params['x'] + ',' + params['y']

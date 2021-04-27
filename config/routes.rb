@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'pages#index'
 
-  get '/data', to: 'data#index'
+  get '/coords', to: 'coords#index'
+  get '/scores', to: 'scores#index'
 end
