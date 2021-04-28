@@ -46,11 +46,6 @@ function App() {
   } 
 
   const calcElapsedTime = () => {
-    const h = timer.time()['h'] * 60 * 60;
-    const m = timer.time()['m'] * 60;
-    const s = timer.time()['s'];
-    const t = h + m + s
-    console.log(t)
     return t
   }
 
@@ -85,7 +80,7 @@ function App() {
         isGameStarted={isGameStarted} 
         isGameOver={isGameOver}
       />
-      <HighScores />
+      <HighScores timer={timer} isGameOver={isGameOver}/>
     </div>
   )
 }

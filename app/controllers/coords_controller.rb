@@ -1,5 +1,4 @@
 class CoordsController < ApplicationController
-
   def index
     @coord = params['x'] + ',' + params['y']
     @data = Coordinate.includes(:character).find_by(location: @coord)
