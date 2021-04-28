@@ -2,15 +2,18 @@ import React, {useState} from 'react';
 
 function HighScores(props) {
   const {timer, isGameOver} = props;
-  const [player, setPlayer] = useState('')
-  const [loc, setLoc] = useState('')
+  const [player, setPlayer] = useState('');
+  const [loc, setLoc] = useState('');
+  const [rank, setRank] = useState(0);
+  const [highScores, setHighScores] = useState([])
+  let uniqid = require('uniqid')
 
   const queryScoresDb = async() => {
     let url = new URL('http://localhost:3000/scores'),
-    params = {timer: timer.ms(), player: player, loc: loc}
+    params = {time: timer.ms(), player: player, loc: loc}
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
     const response = await fetch(url)
-    const data = await response.text()
+    const data = await response.json()
     return data
   }
 
@@ -32,8 +35,9 @@ function HighScores(props) {
   const handleSubmit = async(e) => {
     e.preventDefault();
     const data = await queryScoresDb();
-    console.log(data)
-    setPlayer('');
+    console.log(data['highScores'])
+    setRank(data['rank'])
+    setHighScores(data['highScores'])
   }
 
   const handlePlayerChange = (e) => {
@@ -46,7 +50,17 @@ function HighScores(props) {
 
   return(
     <div>
-      <div>High Scores:</div>
+      <div>
+        <div>High Scores:</div>
+        {highScores.map((score, idx) => {
+          return (
+            <div key={uniqid()}>
+              <div>{idx + 1}. </div>
+              <div>{score.player}</div>
+            </div>
+          )
+        })}
+      </div>
       <form action="" style={formStyle} onSubmit={handleSubmit}>
         <label htmlFor="playerName">Name:</label>
         <input type="text" id='playerName' onChange={handlePlayerChange} />
