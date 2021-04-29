@@ -32,7 +32,7 @@ function Grid(props) {
 
   const handleClick = async (ary) => {
     const char = await queryCoordsDb(ary)
-    if (char) {
+    if (char !== 'null') {
       alertCharFound(char)
     }
   }

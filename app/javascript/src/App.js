@@ -36,8 +36,11 @@ function App() {
   }
 
   const alertCharFound = (str) => {
-    setFoundChars(foundChars => [...foundChars, str])
-    checkGameOver()
+    if (!foundChars.includes(str)) {
+      console.log(str)
+      setFoundChars(foundChars => [...foundChars, str])
+      checkGameOver()
+    }
   }
 
   const isFound = (charName) => {
@@ -83,6 +86,5 @@ function App() {
 export default App
 
 // to do: 
-// -add high scores to db
-
+// -prevent multiple hits on same character
 // -add in additional levels (high scores for each)
