@@ -45,16 +45,11 @@ function App() {
     'inline-block' : 'none';
   } 
 
-  const calcElapsedTime = () => {
-    return t
-  }
-
   const checkGameOver = () => {
     if (foundChars.length === 3 
       && isGameOver === false) {
       timer.stop()
       setIsGameOver(true)
-      calcElapsedTime()
     }
   }
 

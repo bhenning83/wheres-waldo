@@ -13,6 +13,7 @@ function HighScores(props) {
         <div key={uniqid()}>
           <div>{idx + 1}. </div>
           <div>{score.player}</div>
+          <div>{score.location}</div>
         </div>
       )
     })}

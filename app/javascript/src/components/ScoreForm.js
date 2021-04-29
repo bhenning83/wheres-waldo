@@ -7,26 +7,36 @@ function ScoreForm(props) {
   const [loc, setLoc] = useState('');
   const [rank, setRank] = useState(0);
   const [highScores, setHighScores] = useState([])
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false)
 
   const queryScoresDb = async() => {
     let url = new URL('http://localhost:3000/scores'),
-    params = {time: timer.ms(), player: player, loc: loc}
+    params = {time: timer.ms(), player: player, location: loc}
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
     const response = await fetch(url)
     const data = await response.json()
     return data
   }
 
-  const isShown = () => {
-    return isGameOver === true ? 'block' : 'none'
+  const isShown = (boo) => {
+    return boo === true ? 'flex' : 'none'
+  }
+
+  const isFormShown = () => {
+    if (isGameOver===true && isFormSubmitted ===false) {
+      return 'block'
+    } else {
+      return 'none'
+    }
   }
 
   const handleSubmit = async(e) => {
     e.preventDefault();
     const data = await queryScoresDb();
-    console.log(data['highScores'])
-    setRank(data['rank'])
-    setHighScores(data['highScores'])
+    console.log(data['highScores']);
+    setRank(data['rank']);
+    setHighScores(data['highScores']);
+    setIsFormSubmitted(true)
   }
 
   const handlePlayerChange = (e) => {
@@ -38,8 +48,7 @@ function ScoreForm(props) {
   }
 
   const formStyle = {
-    // display: isShown()
- 
+    display: isFormShown()
   }
 
   const boxStyle = {
@@ -48,12 +57,12 @@ function ScoreForm(props) {
     left: '50%',
     background: 'gray',
     padding: '50px',
-    display: 'flex',
+    display: isShown(isGameOver),
     flexDirection: 'column',
   }
 
   const highScoresStyle = {
-    display: isShown()
+    display: isShown(isFormSubmitted)
   }
 
   return(
