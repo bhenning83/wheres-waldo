@@ -5,7 +5,7 @@ import TimerBox from './components/TimerBox';
 import waldoUrl from '../assets/images/Character.Waldo.jpg';
 import wendaUrl from '../assets/images/Character.Wenda.jpg';
 import odlawUrl from '../assets/images/Character.Odlaw.jpg';
-import HighScores from './components/HighScores';
+import ScoreForm from './components/ScoreForm';
 import { Timer } from 'timer-node';
 
 
@@ -80,7 +80,7 @@ function App() {
         isGameStarted={isGameStarted} 
         isGameOver={isGameOver}
       />
-      <HighScores timer={timer} isGameOver={isGameOver}/>
+      <ScoreForm timer={timer} isGameOver={isGameOver}/>
     </div>
   )
 }
