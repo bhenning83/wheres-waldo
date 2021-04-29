@@ -9,7 +9,7 @@ function StartScreen(props) {
 
   const startScreenStyle = {
     height: '1200px',
-    width: '1920px',
+    width: '1856px',
     display: hidden(),
     position: 'absolute',
     top: '0',

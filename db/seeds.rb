@@ -1,4 +1,3 @@
-Character.delete_all
 Coordinate.delete_all
 Score.delete_all
 
@@ -6,24 +5,41 @@ waldo = Character.create({name: 'Waldo'})
 wenda = Character.create({name: 'Wenda'})
 odlaw = Character.create({name: 'Odlaw'})
 
-Coordinate.create([{character: waldo, location: '4,7'},
-                   {character: waldo, location: '4,8'},
-                   {character: waldo, location: '4,9'},
-                   {character: waldo, location: '4,10'},
-                   {character: waldo, location: '4,11'},
-                   {character: wenda, location: '54,35'},
-                   {character: wenda, location: '54,36'},
-                   {character: wenda, location: '55,35'},
-                   {character: wenda, location: '55,36'},
-                   {character: odlaw, location: '54,10'},
-                   {character: odlaw, location: '54,11'},
-                   {character: odlaw, location: '54,12'}
+Coordinate.create([{character: waldo, location: '4,11', level: '1'},
+                   {character: waldo, location: '5,10', level: '1'},
+                   {character: waldo, location: '5,9', level: '1'},
+                   {character: waldo, location: '5,8', level: '1'},
+                   {character: waldo, location: '5,7', level: '1'},
+                   {character: waldo, location: '4,7', level: '1'},
+                   {character: waldo, location: '4,8', level: '1'},
+                   {character: waldo, location: '4,9', level: '1'},
+                   {character: waldo, location: '4,10', level: '1'},
+                   {character: wenda, location: '56,36', level: '1'},
+                   {character: wenda, location: '54,35', level: '1'},
+                   {character: wenda, location: '57,35', level: '1'},
+                   {character: odlaw, location: '56,12', level: '1'},
+                   {character: odlaw, location: '56,11', level: '1'},
+                   {character: odlaw, location: '56,10', level: '1'},
+                   {character: waldo, location: '55,30', level: '2'},
+                   {character: waldo, location: '55,29', level: '2'},
+                   {character: wenda, location: '66,60', level: '2'},
+                   {character: wenda, location: '66,61', level: '2'},
+                   {character: wenda, location: '65,61', level: '2'},
+                   {character: odlaw, location: '71,35', level: '2'},
+                   {character: odlaw, location: '70,35', level: '2'},
+                   {character: odlaw, location: '70,34', level: '2'},
+                   {character: odlaw, location: '71,34', level: '2'},
+                   {character: odlaw, location: '71,33', level: '2'},
+                   {character: odlaw, location: '70,33', level: '2'},
+                   {character: waldo, location: '12,11', level: '3'},
+                   {character: waldo, location: '12,10', level: '3'},
+                   {character: wenda, location: '56,18', level: '3'},
+                   {character: wenda, location: '56,17', level: '3'},
+                   {character: odlaw, location: '64,13', level: '3'},
+                   {character: odlaw, location: '64,12', level: '3'},
+                   {character: odlaw, location: '65,13', level: '3'},
                   ])
 
-mac = Player.create({name: 'Mac', location: 'Philly'})
-dennis = Player.create({name: 'Dennis', location: 'Philly'})
-charlie = Player.create({name: 'Charlie', location: 'Philly'})
-
-Score.create({time: '00:20:22', player: mac})
-Score.create({time: '00:13:56', player: dennis})
-Score.create({time: '00:45:24', player: charlie})
+Score.create({time: '00:20:22', player: 'Mac', location: 'Philly'})
+Score.create({time: '00:13:56', player: 'Dennis', location: 'Philly'})
+Score.create({time: '00:45:24', player: 'Charlie', location: 'Philly'})

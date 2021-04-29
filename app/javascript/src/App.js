@@ -6,6 +6,7 @@ import waldoUrl from '../assets/images/Character.Waldo.jpg';
 import wendaUrl from '../assets/images/Character.Wenda.jpg';
 import odlawUrl from '../assets/images/Character.Odlaw.jpg';
 import ScoreForm from './components/ScoreForm';
+import LevelButtons from './components/LevelButtons'
 import { Timer } from 'timer-node';
 
 
@@ -17,16 +18,11 @@ function App() {
   const [isGameStarted, setIsGameStarted] = useState(false)
   const [isGameOver, setIsGameOver] = useState(false)
   const [timer] = useState(new Timer());
+  const [level, setLevel] = useState(1)
 
   const startGame = () => {
     setIsGameStarted(x => !x);
     timer.start();
-  }
-
-  const homeStyle = {
-    display: 'flex',
-    justifyContent: 'space-around',
-    width: '100vw',
   }
 
   const characters = {
@@ -41,6 +37,10 @@ function App() {
       setFoundChars(foundChars => [...foundChars, str])
       checkGameOver()
     }
+  }
+
+  const changeLevel = (int) => {
+    setLevel(int)
   }
 
   const isFound = (charName) => {
@@ -60,25 +60,42 @@ function App() {
     checkGameOver()
   })
 
+  const homeStyle = {
+    display: 'flex',
+    justifyContent: 'space-around',
+    width: '100vw',
+    flexDirection: 'column'
+  }
+
+  const gridBoxStyle = {
+    display: 'flex',
+    justifyContent: 'space-around',
+    width: '100vw',
+  }
+
   return(
     <div style={homeStyle}>
-      <Grid 
-        alertCharFound={alertCharFound} 
-        isFound={isFound} 
-        isGameStarted={isGameStarted} 
-        startGame={startGame}
-      />
-      <CharTracker 
-        characters = {characters} 
-        isFound={isFound} 
-        foundChars={foundChars} 
-      />
+      <div style={gridBoxStyle}>
+        <Grid 
+          alertCharFound={alertCharFound} 
+          isFound={isFound} 
+          isGameStarted={isGameStarted} 
+          startGame={startGame}
+          level={level}
+        />
+        <CharTracker 
+          characters = {characters} 
+          isFound={isFound} 
+          foundChars={foundChars} 
+        />
+      </div>
       <TimerBox 
         timer={timer} 
         isGameStarted={isGameStarted} 
         isGameOver={isGameOver}
       />
       <ScoreForm timer={timer} isGameOver={isGameOver}/>
+      <LevelButtons changeLevel={changeLevel}/>
     </div>
   )
 }

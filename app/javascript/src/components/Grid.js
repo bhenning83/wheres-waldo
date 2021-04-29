@@ -2,20 +2,20 @@ import React, {useState} from 'react';
 import villageUrl from '../../assets/images/village.jpeg';
 import pirateUrl from '../../assets/images/pirate.jpeg';
 import battleUrl from '../../assets/images/battle.jpeg';
+import CheckMark from './CheckMark';
+import StartScreen from './StartScreen';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
-import StartScreen from './StartScreen'
 const uniqid = require('uniqid');
 
 function Grid(props) {
-  const {alertCharFound, isFound, startGame, isGameStarted} = props;
+  const {alertCharFound, isFound, startGame, isGameStarted, level} = props;
 
   const column = [];
   const rows = [];
   
   const queryCoordsDb = async(ary) => {
     let url = new URL('http://localhost:3000/coords'),
-    params = {x: ary[0], y: ary[1]}
+    params = {x: ary[0], y: ary[1], level: level}
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
     const response = await fetch(url)
     const char = await response.text()
@@ -51,7 +51,7 @@ function Grid(props) {
 
   const gridStyle = {
     display: 'flex',
-    width: '1920px',
+    width: '1856px',
     height: '1200px'
   }
 
@@ -75,48 +75,22 @@ function Grid(props) {
     // border: '1px solid gray'
   }
 
-  const waldoCheck = {
-    position: 'absolute',
-    bottom: '-415px',
-    left: '105px',
-    color: 'green',
-    background: 'white',
-    fontSize: '2rem',
-    boxShadow: '0 0 10px 10px white',
-    borderRadius: '50%',
-    display: isFound('Waldo')
-  }
-
-  const wendaCheck = {
-    position: 'absolute',
-    bottom: '0px',
-    left: '1390px',
-    color: 'green',
-    background: 'white',
-    fontSize: '2rem',
-    boxShadow: '0 0 10px 10px white',
-    borderRadius: '50%',
-    display: isFound('Wenda')
-  }
-
-  const odlawCheck = {
-    position: 'absolute',
-    bottom: '-385px',
-    left: '1375px',
-    color: 'green',
-    background: 'white',
-    fontSize: '2rem',
-    boxShadow: '0 0 7px 10px white',
-    borderRadius: '50%',
-    display: isFound('Odlaw')
+  const backgroundImg = () => {
+    if (level === 1) {
+      return villageUrl
+    } else if (level === 2) {
+      return pirateUrl
+    } else if (level === 3) {
+      return battleUrl
+    }
   }
 
   return(
     <div id='frame' style={frameStyle}>
-      <img src={villageUrl} alt="" style={imgStyle} />
-      <FontAwesomeIcon icon={faCheckCircle} style={waldoCheck} />
-      <FontAwesomeIcon icon={faCheckCircle} style={wendaCheck} />
-      <FontAwesomeIcon icon={faCheckCircle} style={odlawCheck} />
+      <img src={backgroundImg()} alt="" style={imgStyle} />
+      <CheckMark isFound={isFound} level={level} char={'Waldo'}/>
+      <CheckMark isFound={isFound} level={level} char={'Wenda'}/>
+      <CheckMark isFound={isFound} level={level} char={'Odlaw'}/>
       <StartScreen startGame={startGame} isGameStarted={isGameStarted} />
       <div id='grid' style={gridStyle}>
         {rows.map((x, idx) => {
