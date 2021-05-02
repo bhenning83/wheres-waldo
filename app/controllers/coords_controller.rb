@@ -3,7 +3,7 @@ class CoordsController < ApplicationController
     puts params
     @coord = params['x'] + ',' + params['y']
     @data = Coordinate.includes(:character).where('location = ? AND
-                                                    level = ?', @coord, params[:level])
+                                                    level = ?', @coord, params[:level])[0]
 
     @data = @data ? @data.character.name : nil
 

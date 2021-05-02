@@ -1,21 +1,23 @@
-import React, {useState} from 'react';
+import { faBookDead } from '@fortawesome/free-solid-svg-icons';
+import React, {useEffect, useState} from 'react';
 import HighScores from './HighScores';
 
 function ScoreForm(props) {
-  const {timer, isGameOver} = props;
+  const {timer, isGameOver, level} = props;
   const [player, setPlayer] = useState('');
   const [loc, setLoc] = useState('');
   const [rank, setRank] = useState(0);
-  const [highScores, setHighScores] = useState([])
-  const [isFormSubmitted, setIsFormSubmitted] = useState(false)
+  const [highScores, setHighScores] = useState([]);
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+
 
   const queryScoresDb = async() => {
     let url = new URL('http://localhost:3000/scores'),
-    params = {time: timer.ms(), player: player, location: loc}
-    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
-    const response = await fetch(url)
-    const data = await response.json()
-    return data
+    params = {time: timer.ms(), player: player, location: loc, level: level}
+    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
   }
 
   const isShown = (boo) => {
@@ -23,7 +25,7 @@ function ScoreForm(props) {
   }
 
   const isFormShown = () => {
-    if (isGameOver===true && isFormSubmitted ===false) {
+    if (isGameOver === true && isFormSubmitted === false) {
       return 'block'
     } else {
       return 'none'
@@ -33,7 +35,6 @@ function ScoreForm(props) {
   const handleSubmit = async(e) => {
     e.preventDefault();
     const data = await queryScoresDb();
-    console.log(data['highScores']);
     setRank(data['rank']);
     setHighScores(data['highScores']);
     setIsFormSubmitted(true)
@@ -47,27 +48,29 @@ function ScoreForm(props) {
     setLoc(e.target.value)
   }
 
+  useEffect(() => {
+    if (isGameOver === false) {
+      setIsFormSubmitted(false)
+    }
+  }, [isGameOver])
+
   const formStyle = {
     display: isFormShown()
   }
 
   const boxStyle = {
     position: 'fixed',
-    top: '50%',
-    left: '50%',
+    top: '40%',
+    left: '40%',
     background: 'gray',
     padding: '50px',
     display: isShown(isGameOver),
     flexDirection: 'column',
   }
 
-  const highScoresStyle = {
-    display: isShown(isFormSubmitted)
-  }
-
   return(
     <div style={boxStyle}>
-      <HighScores highScores={highScores} style={highScoresStyle}/>
+      <HighScores highScores={highScores} isGameOver={isGameOver} isFormSubmitted={isFormSubmitted}/>
       <form action="" style={formStyle} onSubmit={handleSubmit}>
         <label htmlFor="playerName">Name:</label>
         <input type="text" id='playerName' onChange={handlePlayerChange} />

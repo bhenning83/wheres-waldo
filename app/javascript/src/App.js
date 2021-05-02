@@ -14,11 +14,12 @@ import { Timer } from 'timer-node';
 const character = require('./components/character');
 
 function App() {
-  const [foundChars, setFoundChars] = useState([])
-  const [isGameStarted, setIsGameStarted] = useState(false)
-  const [isGameOver, setIsGameOver] = useState(false)
-  const [timer] = useState(new Timer());
-  const [level, setLevel] = useState(1)
+  const [foundChars, setFoundChars] = useState([]);
+  const [isGameStarted, setIsGameStarted] = useState(false);
+  const [isGameOver, setIsGameOver] = useState(false);
+  const [timer, setTimer] = useState(new Timer());
+  const [level, setLevel] = useState(1);
+
 
   const startGame = () => {
     setIsGameStarted(x => !x);
@@ -33,14 +34,17 @@ function App() {
 
   const alertCharFound = (str) => {
     if (!foundChars.includes(str)) {
-      console.log(str)
       setFoundChars(foundChars => [...foundChars, str])
       checkGameOver()
     }
   }
 
   const changeLevel = (int) => {
-    setLevel(int)
+    setLevel(int);
+    setIsGameOver(false);
+    setIsGameStarted(false);
+    setTimer(new Timer());
+    setFoundChars([])
   }
 
   const isFound = (charName) => {
@@ -94,7 +98,11 @@ function App() {
         isGameStarted={isGameStarted} 
         isGameOver={isGameOver}
       />
-      <ScoreForm timer={timer} isGameOver={isGameOver}/>
+      <ScoreForm 
+        timer={timer} 
+        isGameOver={isGameOver} 
+        level={level}
+      />
       <LevelButtons changeLevel={changeLevel}/>
     </div>
   )
@@ -103,5 +111,7 @@ function App() {
 export default App
 
 // to do: 
-// -prevent multiple hits on same character
-// -add in additional levels (high scores for each)
+// high scores show immediately after changing levels
+// high scores for level 2 are wrong
+// scroll should reset to top left when changing levels
+// add current player to score report

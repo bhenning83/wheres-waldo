@@ -1,5 +1,6 @@
 Coordinate.delete_all
 Score.delete_all
+Character.delete_all
 
 waldo = Character.create({name: 'Waldo'})
 wenda = Character.create({name: 'Wenda'})
@@ -40,6 +41,6 @@ Coordinate.create([{character: waldo, location: '4,11', level: '1'},
                    {character: odlaw, location: '65,13', level: '3'},
                   ])
 
-Score.create({time: '00:20:22', player: 'Mac', location: 'Philly'})
-Score.create({time: '00:13:56', player: 'Dennis', location: 'Philly'})
-Score.create({time: '00:45:24', player: 'Charlie', location: 'Philly'})
+Score.create({time: '00:20:22', player: 'Mac', location: 'Philly', level: 1})
+Score.create({time: '00:13:56', player: 'Dennis', location: 'Philly', level: 2})
+Score.create({time: '00:45:24', player: 'Charlie', location: 'Philly', level: 3})

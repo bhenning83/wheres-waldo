@@ -21,6 +21,11 @@ function TimerBox(props) {
       int = setInterval(updateTimer, 1000)
     }
 
+    //Resets the clock display when a new level is selected
+    if(isGameStarted === false) {
+      setTimerDisplay('00:00:00')
+    }
+
     return(() => clearInterval(int))
   })
 

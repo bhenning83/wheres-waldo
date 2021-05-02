@@ -3,7 +3,8 @@ class ScoresController < ApplicationController
   def index
     score = Score.new(score_params)
     if score.save
-      scores = Score.all.order(time: :desc)
+      scores = Score.all.where('level = ?', params[:level]).order(time: :desc)
+      puts scores
       rank = scores.count{|x| x[:time] < score[:time]}
       respond_to do |format|
         format.json {render :json => {highScores: scores.limit(5), player: params[:player], rank: rank}}
@@ -13,7 +14,7 @@ class ScoresController < ApplicationController
 
   private
   def score_params
-    params.permit(:player, :time, :location)
+    params.permit(:player, :time, :location, :level)
   end
 
 end
