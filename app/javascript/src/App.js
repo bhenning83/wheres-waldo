@@ -111,7 +111,5 @@ function App() {
 export default App
 
 // to do: 
-// high scores show immediately after changing levels
-// high scores for level 2 are wrong
 // scroll should reset to top left when changing levels
 // add current player to score report

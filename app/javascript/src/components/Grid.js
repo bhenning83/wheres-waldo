@@ -1,14 +1,14 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import villageUrl from '../../assets/images/village.jpeg';
 import pirateUrl from '../../assets/images/pirate.jpeg';
 import battleUrl from '../../assets/images/battle.jpeg';
 import CheckMark from './CheckMark';
 import StartScreen from './StartScreen';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const uniqid = require('uniqid');
 
 function Grid(props) {
   const {alertCharFound, isFound, startGame, isGameStarted, level} = props;
+  let frame
 
   const column = [];
   const rows = [];
@@ -41,6 +41,13 @@ function Grid(props) {
     return isGameStarted === true ? 'none' : 'blur(3px)'
   }
 
+
+  useEffect(() => {
+    frame = document.getElementById('frame');
+    frame.scrollTop = 0;
+    frame.scrollLeft = 0;
+  }, [level])
+
   const frameStyle = {
     width: '1000px',
     height: '600px',
@@ -72,7 +79,7 @@ function Grid(props) {
 
   const gridSquareStyle = {
     flex: '1 1 12px',
-    // border: '1px solid gray'
+    border: '1px solid gray'
   }
 
   const backgroundImg = () => {

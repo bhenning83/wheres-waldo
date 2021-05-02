@@ -17,6 +17,7 @@ function ScoreForm(props) {
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
     const response = await fetch(url);
     const data = await response.json();
+    console.log(data)
     return data;
   }
 
