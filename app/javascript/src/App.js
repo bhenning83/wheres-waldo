@@ -5,7 +5,7 @@ import TimerBox from './components/TimerBox';
 import waldoUrl from '../assets/images/Character.Waldo.jpg';
 import wendaUrl from '../assets/images/Character.Wenda.jpg';
 import odlawUrl from '../assets/images/Character.Odlaw.jpg';
-import ScoreForm from './components/ScoreForm';
+import ScoreReport from './components/ScoreReport';
 import LevelButtons from './components/LevelButtons'
 import { Timer } from 'timer-node';
 
@@ -98,7 +98,7 @@ function App() {
         isGameStarted={isGameStarted} 
         isGameOver={isGameOver}
       />
-      <ScoreForm 
+      <ScoreReport
         timer={timer} 
         isGameOver={isGameOver} 
         level={level}
@@ -111,5 +111,5 @@ function App() {
 export default App
 
 // to do: 
-// scroll should reset to top left when changing levels
-// add current player to score report
+//convert score time to 00:00:00
+//get current player's time to correct component

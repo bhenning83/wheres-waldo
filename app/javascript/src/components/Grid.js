@@ -79,7 +79,7 @@ function Grid(props) {
 
   const gridSquareStyle = {
     flex: '1 1 12px',
-    border: '1px solid gray'
+    // border: '1px solid gray'
   }
 
   const backgroundImg = () => {

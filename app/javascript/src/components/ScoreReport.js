@@ -1,8 +1,7 @@
-import { faBookDead } from '@fortawesome/free-solid-svg-icons';
 import React, {useEffect, useState} from 'react';
 import HighScores from './HighScores';
 
-function ScoreForm(props) {
+function ScoreReport(props) {
   const {timer, isGameOver, level} = props;
   const [player, setPlayer] = useState('');
   const [loc, setLoc] = useState('');
@@ -10,14 +9,12 @@ function ScoreForm(props) {
   const [highScores, setHighScores] = useState([]);
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
-
   const queryScoresDb = async() => {
     let url = new URL('http://localhost:3000/scores'),
     params = {time: timer.ms(), player: player, location: loc, level: level}
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
     const response = await fetch(url);
     const data = await response.json();
-    console.log(data)
     return data;
   }
 
@@ -71,7 +68,14 @@ function ScoreForm(props) {
 
   return(
     <div style={boxStyle}>
-      <HighScores highScores={highScores} isGameOver={isGameOver} isFormSubmitted={isFormSubmitted}/>
+      <HighScores 
+        highScores={highScores} 
+        isGameOver={isGameOver} 
+        isFormSubmitted={isFormSubmitted} 
+        rank={rank} 
+        player={player}
+        timer={timer}
+      />
       <form action="" style={formStyle} onSubmit={handleSubmit}>
         <label htmlFor="playerName">Name:</label>
         <input type="text" id='playerName' onChange={handlePlayerChange} />
@@ -83,4 +87,4 @@ function ScoreForm(props) {
   )
 }
 
-export default ScoreForm
+export default ScoreReport
