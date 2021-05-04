@@ -18,18 +18,6 @@ function ScoreReport(props) {
     return data;
   }
 
-  const isShown = (boo) => {
-    return boo === true ? 'flex' : 'none'
-  }
-
-  const isFormShown = () => {
-    if (isGameOver === true && isFormSubmitted === false) {
-      return 'block'
-    } else {
-      return 'none'
-    }
-  }
-
   const handleSubmit = async(e) => {
     e.preventDefault();
     const data = await queryScoresDb();
@@ -47,27 +35,28 @@ function ScoreReport(props) {
   }
 
   useEffect(() => {
+    const ele = document.getElementById('high-scores-box')
     if (isGameOver === false) {
       setIsFormSubmitted(false)
+      ele.style.display = 'none';
+    } 
+    if (isGameOver === true) {
+      ele.style.display = 'flex';
     }
   }, [isGameOver])
 
-  const formStyle = {
-    display: isFormShown()
-  }
+  useEffect(() => {
+    const form = document.querySelector('form')
+    if (isGameOver === true && isFormSubmitted === false) {
+      form.style.display = 'block';
+    } else {
+      form.style.display = 'none';
+    }
+  }, [isGameOver, isFormSubmitted])
 
-  const boxStyle = {
-    position: 'fixed',
-    top: '40%',
-    left: '40%',
-    background: 'gray',
-    padding: '50px',
-    display: isShown(isGameOver),
-    flexDirection: 'column',
-  }
 
   return(
-    <div style={boxStyle}>
+    <div id='high-scores-box'>
       <HighScores 
         highScores={highScores} 
         isGameOver={isGameOver} 
@@ -76,7 +65,7 @@ function ScoreReport(props) {
         player={player}
         timer={timer}
       />
-      <form action="" style={formStyle} onSubmit={handleSubmit}>
+      <form action="" onSubmit={handleSubmit} id='form'>
         <label htmlFor="playerName">Name:</label>
         <input type="text" id='playerName' onChange={handlePlayerChange} />
         <label htmlFor="playerLoc">Location:</label>

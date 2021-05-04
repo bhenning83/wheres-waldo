@@ -48,8 +48,7 @@ function App() {
   }
 
   const isFound = (charName) => {
-    return foundChars.includes(charName) ?
-    'inline-block' : 'none';
+    return foundChars.includes(charName) 
   } 
 
   const checkGameOver = () => {
@@ -64,22 +63,10 @@ function App() {
     checkGameOver()
   })
 
-  const homeStyle = {
-    display: 'flex',
-    justifyContent: 'space-around',
-    width: '100vw',
-    flexDirection: 'column'
-  }
-
-  const gridBoxStyle = {
-    display: 'flex',
-    justifyContent: 'space-around',
-    width: '100vw',
-  }
 
   return(
-    <div style={homeStyle}>
-      <div style={gridBoxStyle}>
+    <div className='home-container'>
+      <div className='grid-box'>
         <Grid 
           alertCharFound={alertCharFound} 
           isFound={isFound} 
@@ -109,7 +96,3 @@ function App() {
 }
 
 export default App
-
-// to do: 
-//convert score time to 00:00:00
-//get current player's time to correct component

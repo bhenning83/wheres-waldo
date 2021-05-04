@@ -1,23 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 function PlayerRank(props) {
 
     const {rank, player, time} = props;
 
-    const isShown = () => {
+    useEffect(() => {
+      const ele = document.getElementById('rankings');
       if (rank > 5) {
-        return 'block'
+        ele.style.display = 'block'
       } else {
-        return 'none'
+        ele.style.display = 'none'
       }
-    }
-
-    const rankStyle = {
-      display: isShown(),
-    }
+    })
 
   return(
-    <div style={rankStyle}>
+    <div id='rankings'>
       <hr></hr>
       <div>{rank}</div>
       <div>{player}</div>

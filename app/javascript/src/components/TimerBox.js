@@ -29,13 +29,8 @@ function TimerBox(props) {
     return(() => clearInterval(int))
   })
 
-  const gameOverStyle = {
-    display: isGameOver === true ? 'block' : 'none'
-  }
-
   return(
     <div>
-      <div style={gameOverStyle}>Game Over</div>
       <div>{timerDisplay}</div>
     </div>
   )

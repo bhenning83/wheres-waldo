@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PlayerRank from './PlayerRank'
 let uniqid = require('uniqid')
 
@@ -12,13 +12,15 @@ function HighScores(props) {
       timer
     } = props;
 
-  const isScoresShown = () => {
+
+  useEffect(() => {
+    const ele = document.getElementById('scores-container')
     if (isGameOver === true && isFormSubmitted === true) {
-      return 'flex'
+      ele.style.display = 'flex';
     } else {
-      return 'none'
+      ele.style.display = 'none';
     }
-  }
+  }, [isGameOver, isFormSubmitted])
 
   const convertTime = (ms) => {
     const secs = ms / 1000;
@@ -32,28 +34,13 @@ function HighScores(props) {
     return `${time1[0]}:${time1[1]}:${time1[2]}`
   }
 
-  const scoresBoxStyle = {
-    display: isScoresShown(),
-    flexDirection: 'column',
-
-  }
-
-  const scoresStyle = {
-    display: 'flex',
-    flexDirection: 'column'
-  }
-
-  const scoreStyle = {
-    display: 'flex'
-  }
-
   return(
-    <div const style={scoresBoxStyle}>
+    <div id='scores-container'>
       <div>High Scores:</div>
       {highScores.map((score, idx) => {
         return (
-          <div key={uniqid()} style={scoresStyle}>
-            <div style={scoreStyle}>
+          <div key={uniqid()} className='score-box'>
+            <div className='score'>
               <div>{idx + 1}. </div>
               <div>{score.player} </div>
               <div>{score.location} </div>

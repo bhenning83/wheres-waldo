@@ -8,11 +8,17 @@ const uniqid = require('uniqid');
 
 function Grid(props) {
   const {alertCharFound, isFound, startGame, isGameStarted, level} = props;
-  let frame
-
   const column = [];
   const rows = [];
   
+  for (let i = 0; i < 75; i++) {
+    column.unshift(i);
+  }
+
+  for (let i = 0; i < column.length; i++) {
+    rows[i] = column
+  }
+
   const queryCoordsDb = async(ary) => {
     let url = new URL('http://localhost:3000/coords'),
     params = {x: ary[0], y: ary[1], level: level}
@@ -22,14 +28,6 @@ function Grid(props) {
     return char
   }
 
-  for (let i = 0; i < 75; i++) {
-    column.unshift(i);
-  }
-
-  for (let i = 0; i < column.length; i++) {
-    rows[i] = column
-  }
-
   const handleClick = async (ary) => {
     const char = await queryCoordsDb(ary)
     if (char !== 'null') {
@@ -37,50 +35,21 @@ function Grid(props) {
     }
   }
 
-  const blurred = () => {
-    return isGameStarted === true ? 'none' : 'blur(3px)'
-  }
+  useEffect(() => {
+    const img = document.getElementById('game-img')
+    if (isGameStarted === true) {
+      img.style.filter = 'none';
+    } else {
+      img.style.filter = 'blur(3px)';
+    }
+  }, [isGameStarted])
 
 
   useEffect(() => {
-    frame = document.getElementById('frame');
+    let frame = document.getElementById('frame');
     frame.scrollTop = 0;
     frame.scrollLeft = 0;
   }, [level])
-
-  const frameStyle = {
-    width: '1000px',
-    height: '600px',
-    border: '3px solid pink',
-    overflow: 'scroll',
-    position: 'relative',
-  }
-
-  const gridStyle = {
-    display: 'flex',
-    width: '1856px',
-    height: '1200px'
-  }
-
-  const imgStyle = {
-    position: 'absolute',
-    filter: blurred(),
-    height: '1200px',
-    top: '0',
-    left: '0',
-    zIndex: '-1'
-  }
-
-  const columnStyle = {
-    flex: '1 1 12px',
-    display: 'flex',
-    flexDirection: 'column'
-  }
-
-  const gridSquareStyle = {
-    flex: '1 1 12px',
-    // border: '1px solid gray'
-  }
 
   const backgroundImg = () => {
     if (level === 1) {
@@ -93,18 +62,18 @@ function Grid(props) {
   }
 
   return(
-    <div id='frame' style={frameStyle}>
-      <img src={backgroundImg()} alt="" style={imgStyle} />
-      <CheckMark isFound={isFound} level={level} char={'Waldo'}/>
-      <CheckMark isFound={isFound} level={level} char={'Wenda'}/>
-      <CheckMark isFound={isFound} level={level} char={'Odlaw'}/>
+    <div id='frame'>
+      <img src={backgroundImg()} alt="waldo-pic" id='game-img'/>
+      <CheckMark isFound={isFound} level={level} charName={'Waldo'}/>
+      <CheckMark isFound={isFound} level={level} charName={'Wenda'}/>
+      <CheckMark isFound={isFound} level={level} charName={'Odlaw'}/>
       <StartScreen startGame={startGame} isGameStarted={isGameStarted} />
-      <div id='grid' style={gridStyle}>
+      <div id='grid'>
         {rows.map((x, idx) => {
-          return <div className='column' style={columnStyle} key={uniqid()}>
+          return <div className='column' key={uniqid()}>
             {x.map(y => {
               return (
-                <div className='grid-square' style={gridSquareStyle} onClick={()=>handleClick([idx, y])} key={uniqid()}></div>
+                <div className='grid-square' onClick={()=>handleClick([idx, y])} key={uniqid()}></div>
               )
             })}
           </div>
