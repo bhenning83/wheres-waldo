@@ -30,7 +30,7 @@ function TimerBox(props) {
   })
 
   return(
-    <div>
+    <div className='timer-box'>
       <div>{timerDisplay}</div>
     </div>
   )

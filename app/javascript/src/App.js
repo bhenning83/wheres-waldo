@@ -74,23 +74,25 @@ function App() {
           startGame={startGame}
           level={level}
         />
-        <CharTracker 
-          characters = {characters} 
-          isFound={isFound} 
-          foundChars={foundChars} 
-        />
+        <div className='side-bar'>
+          <CharTracker 
+            characters = {characters} 
+            isFound={isFound} 
+            foundChars={foundChars} 
+          />
+          <TimerBox 
+            timer={timer} 
+            isGameStarted={isGameStarted} 
+            isGameOver={isGameOver}
+          />
+          <LevelButtons changeLevel={changeLevel}/>
+        </div>
       </div>
-      <TimerBox 
-        timer={timer} 
-        isGameStarted={isGameStarted} 
-        isGameOver={isGameOver}
-      />
       <ScoreReport
         timer={timer} 
         isGameOver={isGameOver} 
         level={level}
       />
-      <LevelButtons changeLevel={changeLevel}/>
     </div>
   )
 }
