@@ -210,18 +210,29 @@ body {
   margin-top: 5px;
   margin-bottom: 15px;
 }
-#form button {
-  background-color: var(--android-green);
-  width: 50%;
-  padding: 10px;
-  font-size: 1rem;
-  align-self: flex-end;
-  margin-top: 10px;
-  border-radius: 3px;
-}
 #form input {
   border-radius: 3px;
 }
 #form input:first-of-type {
   margin-bottom: 10px;
+}
+.score-btn {
+  background-color: var(--android-green);
+  width: 50%;
+  padding: 10px;
+  font-size: 1rem;
+  margin-top: 10px;
+  border-radius: 3px;
+}
+#next-level {
+  background-color: var(--rufous);
+  width: 50%;
+  padding: 10px;
+  font-size: 1rem;
+  margin-top: 10px;
+  border-radius: 3px;
+}
+.score-btn-box {
+  display: flex;
+  justify-content: center;
 }

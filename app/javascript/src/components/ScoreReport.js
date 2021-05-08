@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import HighScores from './HighScores';
+import NextLevelBtn from './NextLevelBtn'
 
 function ScoreReport(props) {
-  const {timer, isGameOver, level} = props;
+  const {timer, isGameOver, level, changeLevel} = props;
   const [player, setPlayer] = useState('');
   const [loc, setLoc] = useState('');
   const [rank, setRank] = useState(0);
@@ -47,12 +48,15 @@ function ScoreReport(props) {
 
   useEffect(() => {
     const form = document.querySelector('form');
+    const btn =  document.querySelector('.score-btn:last-of-type')
     const ele = document.getElementById('high-scores-box');
     if (isGameOver === true && isFormSubmitted === false) {
       form.style.display = 'flex';
+      btn.style.display = 'inline-block';
       ele.style.marginLeft = '-217px';
     } else {
       form.style.display = 'none';
+      btn.style.display = 'none';
       ele.style.marginLeft = '-353px';
     }
   }, [isGameOver, isFormSubmitted])
@@ -76,8 +80,11 @@ function ScoreReport(props) {
         <input type="text" id='playerName' onChange={handlePlayerChange} />
         <label htmlFor="playerLoc">Location:</label>
         <input type="text" id='playerLoc' onChange={handleLocChange}/>
-        <button type='submit'>Submit</button>
       </form>
+      <div className='score-btn-box'>
+        <NextLevelBtn level={level} changeLevel={changeLevel} className='score-btn' />
+        <button type='submit' onClick={handleSubmit} className='score-btn'>Submit</button>
+      </div>
     </div>
   )
 }

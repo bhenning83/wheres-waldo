@@ -112,6 +112,7 @@ function App() {
         timer={timer} 
         isGameOver={isGameOver} 
         level={level}
+        changeLevel={changeLevel}
       />
     </div>
   )

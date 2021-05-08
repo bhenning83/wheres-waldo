@@ -36,6 +36,8 @@ function CheckMark(props) {
     check.style.bottom = checkPos()[1];
     if (isFound(charName)) {
       check.style.display = 'inline-block'
+    } else {
+      check.style.display = 'none'
     }
   })
 
