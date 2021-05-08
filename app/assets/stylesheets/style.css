@@ -213,8 +213,8 @@ body {
 #form input {
   border-radius: 3px;
 }
-#form input:first-of-type {
-  margin-bottom: 10px;
+#form label:last-of-type {
+  margin-top: 10px;
 }
 .score-btn {
   background-color: var(--android-green);
@@ -235,4 +235,7 @@ body {
 .score-btn-box {
   display: flex;
   justify-content: center;
+}
+.error {
+  color: var(--barn-red)
 }
