@@ -73,16 +73,6 @@ function App() {
     setInitGame(true)
   }, [initGame])
 
-  const handleKeyPress = (e) => {
-    if (e.keyCode === 32) {
-      setFoundChars(['Waldo', 'Wenda', 'Odlaw'])
-    }
-  }
-  useEffect(() => {
-    addEventListener('keypress', handleKeyPress)
-  })
-
-
   return(
     <div className='home-container'>
       <div className='grid-box'>
