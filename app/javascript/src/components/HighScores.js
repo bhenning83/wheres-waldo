@@ -9,6 +9,7 @@ function HighScores(props) {
       isFormSubmitted, 
       rank, 
       player,
+      location,
       timer
     } = props;
 
@@ -36,7 +37,13 @@ function HighScores(props) {
 
   return(
     <div id='scores-container'>
-      <div>High Scores:</div>
+      <div>High Scores</div>
+      <div className='score-labels'>
+        <div>Rank</div>
+        <div>Name</div>
+        <div>Location</div>
+        <div>Time</div>
+      </div>
       {highScores.map((score, idx) => {
         return (
           <div key={uniqid()} className='score-box'>
@@ -49,7 +56,12 @@ function HighScores(props) {
           </div>
         )
       })}
-      <PlayerRank rank={rank} player={player} time={convertTime(timer.ms())}/>
+      <PlayerRank 
+        rank={rank} 
+        player={player} 
+        location={location} 
+        time={convertTime(timer.ms())}
+      />
     </div>
   )
 }

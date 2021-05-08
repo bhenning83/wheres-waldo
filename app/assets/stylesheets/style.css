@@ -1,9 +1,9 @@
 :root {
-  --yellow-green-color-wheel: #2cb22cff;
-  --cafe-au-lait: #a77d60ff;
-  --pale-silver: #bfb8b6ff;
-  --linen: #f3eadfff;
-  --white: #fefdfeff;
+  --rosewood: #5d0003ff;
+  --android-green: #accf0dff;
+  --satin-sheen-gold: #cc9a27ff;
+  --rufous: #ac280dff;
+  --barn-red: #7d1604ff;
 }
 body {
   font-family: 'Poppins', sans-serif;
@@ -28,9 +28,9 @@ body {
   justify-content: space-between;
 }
 .char-tracker {
-  background: lightblue;
   flex: 1 1 450px;
-  border: 3px solid green;
+  border: 3px solid var(--rosewood);
+  background-color: var(--android-green);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -38,7 +38,6 @@ body {
 }
 .timer-box {
   flex: 1 1 100px;
-  border: 3px solid blue;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -53,15 +52,21 @@ body {
 .lvl-btn {
   flex: 1;
   height: 100%;
-  background-color: ;
+}
+.lvl-btn:nth-of-type(1) {
+  background: var(--android-green);
 }
 .lvl-btn:nth-of-type(2) {
   margin: 0 5px;
+  background-color: var(--satin-sheen-gold);
+}
+.lvl-btn:nth-of-type(3) {
+  background-color: var(--rufous);
 }
 #frame {
   width: 1000px;
   height: 600px;
-  border: 3px solid pink;
+  border: 3px solid var(--rosewood);
   overflow: scroll;
   position: relative;
   margin-right: 10px;
@@ -87,13 +92,14 @@ body {
 .grid-square {
   flex: 1 1 12px
 }
-#high-scores-box {
-  position: fixed;
-  top: 40%;
-  left: 40%;
-  background: gray;
-  padding: 50px;
-  flex-direction: column;
+.checkmark {
+  color: var(--rufous);
+  background: white;
+  font-size: 2rem;
+  box-shadow: 0 0 10px 10px white;
+  border-radius: 50%;
+  position: absolute;
+  display: none;
 }
 .avatar-box {
   display: flex;
@@ -115,20 +121,62 @@ body {
   background-repeat: no-repeat;
   border: 5px solid black;
 }
+#high-scores-box {
+  position: fixed;
+  left: 50%;
+  background: var(--satin-sheen-gold);
+  padding: 50px;
+  flex-direction: column;
+  border-radius: 5px;
+  border: 3px solid black;
+  margin-left: -217px;
+}
 #scores-container {
   display: none;
   /* js will set display to flex */
   flex-direction: column;
+  width: 600px;
+}
+#scores-container > div:first-of-type {
+  text-align: center;
+  margin-bottom: 10px;
+}
+.score-labels {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+  margin-bottom: 10px;
+}
+.score-labels > div {
+  flex: 1 1 100px;
+  text-align: center;
+  margin: 0 10px;
 }
 .score-box {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 .score {
   display: flex;
+  justify-content: space-between;
+  margin-bottom: 7px;
+  width: 100%;
+}
+.score > div {
+  flex: 1 1 100px;
+  text-align: center;
+  margin: 0 10px;
 }
 #rankings {
   display: none;
+  border-top: 1px solid black;
+}
+#rankings > div {
+  flex: 1 1 100px;
+  text-align: center;
+  margin: 0 10px;
+  padding-top: 10px;
 }
 #start-screen {
   height: 1200px;
@@ -142,20 +190,38 @@ body {
   border-radius: 3px;
   border: 2px solid black;
   color: black;
-  background: var(--yellow-green-color-wheel);
+  background: var(--android-green);
   position: fixed;
   top: 300px;
   left: 500px;
+  font-size: 1.5rem;
 }
 #form {
   display: 'none';
+  flex-direction: column;
 }
-.checkmark {
-  color: var(--yellow-green-color-wheel);
-  background: white;
+.congrats {
   font-size: 2rem;
-  box-shadow: 0 0 10px 10px white;
-  border-radius: 50%;
-  position: absolute;
-  display: none;
+  text-align: center;
+}
+.congrats + div {
+  font-size: 1.4rem;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+#form button {
+  background-color: var(--android-green);
+  width: 50%;
+  padding: 10px;
+  font-size: 1rem;
+  align-self: flex-end;
+  margin-top: 10px;
+  border-radius: 3px;
+}
+#form input {
+  border-radius: 3px;
+}
+#form input:first-of-type {
+  margin-bottom: 10px;
 }

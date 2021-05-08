@@ -7,7 +7,7 @@ import StartScreen from './StartScreen';
 const uniqid = require('uniqid');
 
 function Grid(props) {
-  const {alertCharFound, isFound, startGame, isGameStarted, level} = props;
+  const {alertCharFound, isFound, startGame, isGameStarted, isGameOver, level} = props;
   const column = [];
   const rows = [];
   
@@ -37,12 +37,13 @@ function Grid(props) {
 
   useEffect(() => {
     const img = document.getElementById('game-img')
-    if (isGameStarted === true) {
+    if (isGameStarted === true 
+      && isGameOver === false) {
       img.style.filter = 'none';
     } else {
       img.style.filter = 'blur(3px)';
     }
-  }, [isGameStarted])
+  }, [isGameOver, isGameStarted])
 
 
   useEffect(() => {

@@ -48,7 +48,7 @@ function ScoreReport(props) {
   useEffect(() => {
     const form = document.querySelector('form')
     if (isGameOver === true && isFormSubmitted === false) {
-      form.style.display = 'block';
+      form.style.display = 'flex';
     } else {
       form.style.display = 'none';
     }
@@ -64,8 +64,11 @@ function ScoreReport(props) {
         rank={rank} 
         player={player}
         timer={timer}
+        location={loc}
       />
       <form action="" onSubmit={handleSubmit} id='form'>
+        <div className='congrats'>You found them!</div>
+        <div className='congrats'>Enter your info to see how you rank</div>
         <label htmlFor="playerName">Name:</label>
         <input type="text" id='playerName' onChange={handlePlayerChange} />
         <label htmlFor="playerLoc">Location:</label>

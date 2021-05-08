@@ -20,7 +20,6 @@ function App() {
   const [timer, setTimer] = useState(new Timer());
   const [level, setLevel] = useState(1);
 
-
   const startGame = () => {
     setIsGameStarted(x => !x);
     timer.start();
@@ -63,6 +62,15 @@ function App() {
     checkGameOver()
   })
 
+  const handleKeyPress = (e) => {
+    if (e.keyCode === 32) {
+      setFoundChars(['Waldo', 'Wenda', 'Odlaw'])
+    }
+  }
+  useEffect(() => {
+    addEventListener('keypress', handleKeyPress)
+  })
+
 
   return(
     <div className='home-container'>
@@ -71,6 +79,7 @@ function App() {
           alertCharFound={alertCharFound} 
           isFound={isFound} 
           isGameStarted={isGameStarted} 
+          isGameOver={isGameOver}
           startGame={startGame}
           level={level}
         />
