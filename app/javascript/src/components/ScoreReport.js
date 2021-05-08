@@ -35,7 +35,7 @@ function ScoreReport(props) {
   }
 
   useEffect(() => {
-    const ele = document.getElementById('high-scores-box')
+    const ele = document.getElementById('high-scores-box');
     if (isGameOver === false) {
       setIsFormSubmitted(false)
       ele.style.display = 'none';
@@ -46,11 +46,14 @@ function ScoreReport(props) {
   }, [isGameOver])
 
   useEffect(() => {
-    const form = document.querySelector('form')
+    const form = document.querySelector('form');
+    const ele = document.getElementById('high-scores-box');
     if (isGameOver === true && isFormSubmitted === false) {
       form.style.display = 'flex';
+      ele.style.marginLeft = '-217px';
     } else {
       form.style.display = 'none';
+      ele.style.marginLeft = '-353px';
     }
   }, [isGameOver, isFormSubmitted])
 

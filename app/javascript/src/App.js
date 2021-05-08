@@ -19,17 +19,23 @@ function App() {
   const [isGameOver, setIsGameOver] = useState(false);
   const [timer, setTimer] = useState(new Timer());
   const [level, setLevel] = useState(1);
+  const [characters, setCharacters] = useState([])
+  const [initGame, setInitGame] = useState(false)
 
   const startGame = () => {
     setIsGameStarted(x => !x);
     timer.start();
   }
 
-  const characters = {
-    1: character('Waldo', waldoUrl),
-    2: character('Odlaw', odlawUrl),
-    3: character('Wenda', wendaUrl),
+  const initChars = () => {
+    setCharacters({
+        1: character('Waldo', waldoUrl),
+        2: character('Odlaw', odlawUrl),
+        3: character('Wenda', wendaUrl),
+    })
   }
+  
+
 
   const alertCharFound = (str) => {
     if (!foundChars.includes(str)) {
@@ -61,6 +67,11 @@ function App() {
   useEffect(() => {
     checkGameOver()
   })
+
+  useEffect(() => {
+    initChars()
+    setInitGame(true)
+  }, [initGame])
 
   const handleKeyPress = (e) => {
     if (e.keyCode === 32) {
