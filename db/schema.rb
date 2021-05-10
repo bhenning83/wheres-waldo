@@ -10,33 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_09_221609) do
+ActiveRecord::Schema.define(version: 2021_04_27_191715) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "characters", force: :cascade do |t|
-    t.string "name"
+    t.text "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "coordinates", force: :cascade do |t|
-    t.integer "character_id"
-    t.string "location"
+    t.bigint "character_id"
+    t.text "location"
+    t.integer "level"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "level"
     t.index ["character_id"], name: "index_coordinates_on_character_id"
   end
 
   create_table "scores", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "player"
-    t.string "location"
+    t.text "location"
+    t.text "player"
     t.integer "level"
     t.integer "ms"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
 end

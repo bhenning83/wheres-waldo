@@ -1,7 +1,10 @@
 class CreateScores < ActiveRecord::Migration[6.1]
   def change
     create_table :scores do |t|
-      t.time :time
+      t.text :location
+      t.text :player
+      t.integer :level
+      t.integer :ms
 
       t.timestamps
     end

@@ -3,6 +3,7 @@ class CreateCoordinates < ActiveRecord::Migration[6.1]
     create_table :coordinates do |t|
       t.belongs_to :character
       t.text :location
+      t.integer :level
 
       t.timestamps
     end
