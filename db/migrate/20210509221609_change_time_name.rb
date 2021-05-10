@@ -4,6 +4,6 @@ class ChangeTimeName < ActiveRecord::Migration[6.1]
   end
 
   def down
-    remove_column :scores, :time, :integer
+    remove_column :scores, :time
   end
 end
