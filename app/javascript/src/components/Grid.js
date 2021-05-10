@@ -20,7 +20,7 @@ function Grid(props) {
   }
 
   const queryCoordsDb = async(ary) => {
-    let url = new URL('http://localhost:3000/coords'),
+    let url = new URL('https://peaceful-island-27420.herokuapp.com/https://brendons-wheres-waldo.herokuapp.com/coords'),
     params = {x: ary[0], y: ary[1], level: level}
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
     const response = await fetch(url)

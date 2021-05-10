@@ -30,7 +30,7 @@ function ScoreReport(props) {
   })
 
   const queryScoresDb = async() => {
-    let url = new URL('http://localhost:3000/scores'),
+    let url = new URL('https://peaceful-island-27420.herokuapp.com/https://brendons-wheres-waldo.herokuapp.com/scores'),
     params = {ms: timer.ms(), player: player, location: loc, level: level}
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
     const response = await fetch(url);
