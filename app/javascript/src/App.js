@@ -34,8 +34,6 @@ function App() {
         3: character('Wenda', wendaUrl),
     })
   }
-  
-
 
   const alertCharFound = (str) => {
     if (!foundChars.includes(str)) {

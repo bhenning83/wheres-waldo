@@ -51,7 +51,7 @@ function HighScores(props) {
               <div>{idx + 1}. </div>
               <div>{score.player} </div>
               <div>{score.location} </div>
-              <div>{convertTime(score.time)}</div>
+              <div>{convertTime(score.ms)}</div>
             </div>
           </div>
         )

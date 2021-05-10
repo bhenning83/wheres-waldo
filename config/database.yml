@@ -83,4 +83,4 @@ production:
   <<: *default
   database: wheres_waldo_production
   username: wheres_waldo
-  password: <%= ENV['WHERES_WALDO_DATABASE_PASSWORD'] %>
+  password: 
