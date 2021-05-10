@@ -5,8 +5,8 @@ import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 function CheckMark(props) {
   const {isFound, level, charName} = props;
 
+  //Sets the position of the checkmarks above characters' heads in each level
   const checkPos = () => {
-
     switch(true) {
       case((level === 1) && (charName === 'Waldo')): 
         return ['105px', '-410px']

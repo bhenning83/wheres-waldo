@@ -36,6 +36,7 @@ function App() {
   }
 
   const alertCharFound = (str) => {
+    //prevents duplicate characters being found
     if (!foundChars.includes(str)) {
       setFoundChars(foundChars => [...foundChars, str])
       checkGameOver()
@@ -43,6 +44,7 @@ function App() {
   }
 
   const changeLevel = (int) => {
+    //reset all working data when level is changed
     setLevel(int);
     setIsGameOver(false);
     setIsGameStarted(false);
@@ -55,6 +57,7 @@ function App() {
   } 
 
   const checkGameOver = () => {
+    //if all three characters are found
     if (foundChars.length === 3 
       && isGameOver === false) {
       timer.stop()
@@ -66,6 +69,7 @@ function App() {
     checkGameOver()
   })
 
+  //creates the characters
   useEffect(() => {
     initChars()
     setInitGame(true)

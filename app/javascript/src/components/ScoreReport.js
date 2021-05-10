@@ -29,10 +29,11 @@ function ScoreReport(props) {
     btn =  document.querySelector('.score-btn:last-of-type');
   })
 
+  //sends plalyer's score and info to db, receives high scores back as repsonse
   const queryScoresDb = async() => {
     let url = new URL('https://brendons-wheres-waldo.herokuapp.com/scores'),
     params = {ms: timer.ms(), player: player, location: loc, level: level}
-    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+    Object.keys(params).forEach(key => url.searchParams.append(key, params[key])); //adds params to api request
     const response = await fetch(url, {
       headers: {
         'Access-Control-Allow-Origin' : '*',
@@ -55,11 +56,13 @@ function ScoreReport(props) {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
+    //requires form inputs to be filled out
     if (!playerName.validity.valid) {
       showNameError();
     } else if (!playerLoc.validity.valid) {
       showLocError();
     } else {
+      //if form inputs filled out, send score to db and store the response info
       const data = await queryScoresDb();
       setRank(data['rank']);
       setHighScores(data['highScores']);
@@ -83,6 +86,7 @@ function ScoreReport(props) {
     }
   }
 
+  //hides high scores until game is over
   useEffect(() => {
     if (isGameOver === false) {
       setIsFormSubmitted(false)
@@ -93,6 +97,7 @@ function ScoreReport(props) {
     }
   }, [isGameOver])
 
+  //hides form unless game is over and score is not yet submitted
   useEffect(() => {
     if (isGameOver === true && isFormSubmitted === false) {
       form.style.display = 'flex';

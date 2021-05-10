@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 
 function AvatarDisplay(props) {
-  const {char, isFound, avsLoaded, addLoaded} = props;
+  const {char, isFound} = props;
 
+  //displays an 'X' over found characters' avatars
   useEffect(() => {
     const x = document.getElementById(`${char.getName()}-x`);
     if (isFound(char.getName())) {

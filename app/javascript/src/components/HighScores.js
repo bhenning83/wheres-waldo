@@ -13,7 +13,7 @@ function HighScores(props) {
       timer
     } = props;
 
-
+  //hides the high scores unless at the end of the game
   useEffect(() => {
     const ele = document.getElementById('scores-container')
     if (isGameOver === true && isFormSubmitted === true) {
@@ -23,6 +23,7 @@ function HighScores(props) {
     }
   }, [isGameOver, isFormSubmitted])
 
+  //converts ms to '00:00:00' 
   const convertTime = (ms) => {
     const secs = ms / 1000;
     let hr = Math.floor((secs / 3600));

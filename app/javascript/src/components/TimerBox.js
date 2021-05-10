@@ -4,6 +4,7 @@ function TimerBox(props) {
   const {timer, isGameStarted, isGameOver} = props
   const [timerDisplay, setTimerDisplay] = useState('00:00:00')
 
+  //converts current timer time to '00:00:00'
   const updateTimer = () => {
     let m = timer.time()['m'];
     let s = timer.time()['s'];
@@ -16,6 +17,7 @@ function TimerBox(props) {
 
   useEffect(() => {
     let int
+    //updates timer display every second
     if (isGameStarted === true &&
       isGameOver === false) {
       int = setInterval(updateTimer, 1000)

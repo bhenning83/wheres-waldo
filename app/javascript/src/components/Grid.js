@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import villageUrl from '../../assets/images/village.jpeg';
 import pirateUrl from '../../assets/images/pirate.jpeg';
 import battleUrl from '../../assets/images/battle.jpeg';
@@ -11,6 +11,7 @@ function Grid(props) {
   const column = [];
   const rows = [];
   
+  //sets up arrays to map through and create grid
   for (let i = 0; i < 75; i++) {
     column.unshift(i);
   }
@@ -20,9 +21,11 @@ function Grid(props) {
   }
 
   const queryCoordsDb = async(ary) => {
+    //sends the location of the click on the grid to the db
+    //receives the name of the character that was click on, if any
     let url = new URL('https://brendons-wheres-waldo.herokuapp.com/coords'),
     params = {x: ary[0], y: ary[1], level: level}
-    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
+    Object.keys(params).forEach(key => url.searchParams.append(key, params[key])) //adds params to api request
     const response = await fetch(url, {
       mode: 'cors',
       headers: {
@@ -34,6 +37,7 @@ function Grid(props) {
     return char
   }
 
+  //checks to see if a character was clicked on, then adds it to found characters list
   const handleClick = async (ary) => {
     const char = await queryCoordsDb(ary)
     if (char !== 'null') {
@@ -41,6 +45,7 @@ function Grid(props) {
     }
   }
 
+  //adds a blurred filter to image before game is started
   useEffect(() => {
     const img = document.getElementById('game-img')
     if (isGameStarted === true 
@@ -52,6 +57,7 @@ function Grid(props) {
   }, [isGameOver, isGameStarted])
 
 
+  //resets the scroll within the image frame to the top-left corner
   useEffect(() => {
     let frame = document.getElementById('frame');
     frame.scrollTop = 0;
@@ -59,6 +65,7 @@ function Grid(props) {
   }, [level])
 
   const backgroundImg = () => {
+    //changes the image for each level
     if (level === 1) {
       return villageUrl
     } else if (level === 2) {

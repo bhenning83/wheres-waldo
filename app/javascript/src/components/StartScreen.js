@@ -3,10 +3,7 @@ import React, {useEffect} from 'react'
 function StartScreen(props) {
   const {startGame, isGameStarted} = props;
 
-  const hidden = () => {
-    return isGameStarted === true ? 'none' : 'block';
-  }
-
+  //hides start screen once game is started
   useEffect(() => {
     const ele = document.getElementById('start-screen');
     if (isGameStarted === true) {
