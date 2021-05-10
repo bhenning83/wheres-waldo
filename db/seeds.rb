@@ -41,6 +41,6 @@ Coordinate.create([{character: waldo, location: '4,11', level: 1},
                    {character: odlaw, location: '65,13', level: 3},
                   ])
 
-Score.create({ms: '2733000', player: 'Mac', location: 'Philly', level: 1})
-Score.create({ms: '3406000', player: 'Dennis', location: 'Philly', level: 2})
-Score.create({ms: '4453700', player: 'Charlie', location: 'Philly', level: 3})
+Score.create({ms: '2733000', location: 'Philly', player: 'Mac', level: 1})
+Score.create({ms: '3406000', location: 'Philly', player: 'Dennis', level: 2})
+Score.create({ms: '4453700', location: 'Philly', player: 'Charlie', level: 3})
