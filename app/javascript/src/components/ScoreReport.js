@@ -30,10 +30,15 @@ function ScoreReport(props) {
   })
 
   const queryScoresDb = async() => {
-    let url = new URL('https://peaceful-island-27420.herokuapp.com/https://brendons-wheres-waldo.herokuapp.com/scores'),
+    let url = new URL('https://brendons-wheres-waldo.herokuapp.com/scores'),
     params = {ms: timer.ms(), player: player, location: loc, level: level}
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      headers: {
+        'Access-Control-Allow-Origin' : '*',
+        'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+      }
+    });
     const data = await response.json();
     return data;
   }

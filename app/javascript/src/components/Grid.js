@@ -20,10 +20,16 @@ function Grid(props) {
   }
 
   const queryCoordsDb = async(ary) => {
-    let url = new URL('https://peaceful-island-27420.herokuapp.com/https://brendons-wheres-waldo.herokuapp.com/coords'),
+    let url = new URL('https://brendons-wheres-waldo.herokuapp.com/coords'),
     params = {x: ary[0], y: ary[1], level: level}
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
-    const response = await fetch(url)
+    const response = await fetch(url, {
+      mode: 'cors',
+      headers: {
+        'Access-Control-Allow-Origin' : '*',
+        'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+      }
+    })
     const char = await response.text()
     return char
   }
