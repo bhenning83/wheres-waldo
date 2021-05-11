@@ -4,7 +4,7 @@
 
 <p>This app is currently hosted for free by Heroku and can be seen live at <a href='https://brendons-wheres-waldo.herokuapp.com'>brendons-wheres-waldo.herokuapp.com</a>. (Heroku dynos are put to sleep after 30 minutes of inactivity. Please allow 30-45 seconds for app to load if it's inactive.)<p>
   
- <p>API calls might have to be set to no-cors if calling from a localhost. Otherwise you can set up your own database with starter data by running rake db:migrate and rake db:seed. </p>
+ <p>API calls might have to be set to no-cors if calling from a localhost. Otherwise you can set up your own database with starter data by running 'rake db:migrate db:seed' and changing the domain in the API url to your local server. </p>
   
  <p>Project was recommended by <a href='https://www.theodinproject.com/'>The Odin Project.</a></p>
   
