@@ -70,7 +70,6 @@ body {
   overflow: scroll;
   position: relative;
   margin-right: 10px;
-  cursor: pointer;
 }
 #grid {
   display: flex;

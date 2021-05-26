@@ -19,8 +19,8 @@ function App() {
   const [isGameOver, setIsGameOver] = useState(false);
   const [timer, setTimer] = useState(new Timer());
   const [level, setLevel] = useState(1);
-  const [characters, setCharacters] = useState([])
-  const [initGame, setInitGame] = useState(false)
+  const [characters, setCharacters] = useState([]);
+  const [initGame, setInitGame] = useState(false);
 
   const startGame = () => {
     setIsGameStarted(x => !x);
@@ -37,7 +37,8 @@ function App() {
 
   const alertCharFound = (str) => {
     //prevents duplicate characters being found
-    if (!foundChars.includes(str)) {
+    if (!foundChars.includes(str) &&
+      str != undefined) {
       setFoundChars(foundChars => [...foundChars, str])
       checkGameOver()
     }
@@ -60,6 +61,7 @@ function App() {
     //if all three characters are found
     if (foundChars.length === 3 
       && isGameOver === false) {
+        console.log(foundChars)
       timer.stop()
       setIsGameOver(true)
     }
@@ -69,7 +71,19 @@ function App() {
     checkGameOver()
   })
 
-  //creates the characters
+  const handleKeyDown = (e) => {
+    if (e.keyCode === 27) {
+      setFoundChars(['Waldo', 'Wenda', 'Odlaw'])
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown)
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  })
+
   useEffect(() => {
     initChars()
     setInitGame(true)

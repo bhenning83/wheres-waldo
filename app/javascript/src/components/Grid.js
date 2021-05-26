@@ -27,7 +27,7 @@ function Grid(props) {
     params = {x: ary[0], y: ary[1], level: level}
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key])) //adds params to api request
     const response = await fetch(url, {
-      mode: 'cors',
+      mode: 'no-cors',
       headers: {
         'Access-Control-Allow-Origin' : '*',
         'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
