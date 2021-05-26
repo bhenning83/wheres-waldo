@@ -72,7 +72,7 @@ function App() {
   })
 
   const handleKeyDown = (e) => {
-    if (e.keyCode === 27) {
+    if (e.keyCode === 87) {
       setFoundChars(['Waldo', 'Wenda', 'Odlaw'])
     }
   }
